@@ -1,7 +1,10 @@
 <%= form_with model: @message, id: 'new_message', local: true do |f| %>
   <%= f.text_field :content, placeholder: 'type a message' %>
-  <%= f.file_field :image %>
+  <%= f.file_field :image, name: 'message[images][]', id: 'message_image' %>
   <%= f.submit '送信' %>
-  <div id="image-list"></div>
+  <div id="image-list">
+    <% @message.images.each do |image| %>
+      <%= image_tag images, class: "images"%>
+    <% end %>
+  </div>
 <% end %>
-<%= image_tag @message.image, id: 'image' if @message.image.present? %>
